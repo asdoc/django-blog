@@ -71,7 +71,7 @@ def add(request):
 		content = request.POST['content']
 		file_store = request.FILES['file']
 		save(author,content,file_store)
-		return HttpResponse("<html><h1>Saved successfully</h1></html>")	
+		return HttpResponse("<html><h1>Saved successfully</h1><br/>Go to <a href='/'>home</a></html>")	
 	return render(request,'add.html')
 	
 def blog(request,id_blog):
