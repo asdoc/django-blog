@@ -1,0 +1,12 @@
+<html>
+	<a position="absolute" style="float:right" href="/add"><button >Add</button></a>
+	<h1> All Blogs </h1>
+	{% for blog in blogs %}
+		<h2>Blog: {{blog.author}}</h2>
+		Author: {{blog.author}} <br/>
+		Content: {{blog.content}} <br/>
+		Hits: {{blog.hits}} <br/>
+		<img src="/static/{{blog.file_path}}">
+		<hr/>
+	{% endfor %}
+</html>
