@@ -71,11 +71,8 @@ def graph(request):
 	fs = gridfs.GridFS( client )
 	x = client.new.find()
 	for i in x:
-		blog_data = {}
-		blog_data['author']=i['author']
-		blog_data['hits']=i['hits']
-		max_hits=max(max_hits,blog_data['hits'])
-		blogs.append(blog_data)
+		max_hits=max(max_hits,i['hits'])
+		blogs.append(i)
 	
 	for i in xrange(len(blogs)):
 		blogs[i]['percent'] = ((100*float(blogs[i]['hits']))/max_hits)

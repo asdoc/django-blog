@@ -37,7 +37,8 @@ border-radius: 2px;
 
 <br>
 <pre>
-	<h1>Hits graph</h1><dl style="width: 800px">{% for i in blogs %}<dt>{{i.author}}</dt>
-		<dd><div id="data-one" class="bar" style="width: {{i.percent}}%">{{i.hits}} hits</div></dd>
+	<h1>Hits graph</h1><dl style="width: 800px">{% for i in blogs %}{% if i.percent != 0 %}<dt>{{i.author}}</dt>
+			<dd><div id="data-one" class="bar" style="width: {{i.percent}}%">{{i.hits}} hits</div></dd>
+		{% endif %}
 	{% endfor %}</dl>
 </pre>
