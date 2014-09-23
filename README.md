@@ -1,7 +1,7 @@
 Blog in Django
 ==============
 
-A blog interface in django using mongodb.
+A blog interface in Django using MongoDB.
 
 Run by executing
 
