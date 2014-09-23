@@ -1,8 +1,14 @@
 <html>
-	<form action="." enctype="multipart/form-data" method="post">
-		Author: <input type="text" name="author"> <br/>
-		Content: <input type="text" name="content"> <br/>
-		Image: <input type="file" name="file"> <br/>
-		<input type="submit" value="Create Blog">
-	</form>
+	<link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/static/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <script src="/static/jq.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <pre>
+    	<h1 align="center">Add Blog</h1>
+		<form action="." enctype="multipart/form-data" method="post">
+					<textarea placeholder="Title" style="width:700px;height:50px" type="text" name="author"></textarea><br/>
+					<textarea placeholder="Content" style="width:700px;height:250px" type="text" name="content"></textarea><br/>
+					<input type="file" name="file"> 					   <input class="btn btn-big" type="submit" value="Create Blog">
+		</form>
+	</pre>
 </html>

@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     url(r'^$', 'app.views.home', name='home'),
     url(r'^add/$', 'app.views.add', name='add'),
     url(r'^blog/(.*)', 'app.views.blog', name='blog'),
+    url(r'^graph/$', 'app.views.graph', name='graph'),
     # url(r'^blog/', include('blog.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

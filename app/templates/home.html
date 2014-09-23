@@ -1,10 +1,19 @@
 <html>
-	<a position="absolute" style="float:right" href="/add"><button >Add</button></a>
-	<h1> All Blogs </h1>
+	<link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/static/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <script src="/static/jq.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <pre><div position="absolute" style="float:right"><a href="/graph"><button class="btn btn-large">Graph</button></a>   <a href="/add"><button class="btn btn-large">Add</button></a>    </div>
+	<h1 position="absolute" style="float:left"> All Blogs </h1>
+	
+	</pre>
+	<hr/>
 	{% for blog in blogs %}
-		<h2>Author: {{blog.author}}</h2>
-		<h3>Hits: {{blog.hits}}</h3>
-		<a href="/blog/{{blog.id}}">View</a>
-		<hr/>
+		
+		<h3>&nbsp;&nbsp;&nbsp;&nbsp;{{blog.author}}</h3>
+		<h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hits: {{blog.hits}}</h4>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/blog/{{blog.id}}"><button class="btn btn-big">View</button></a>
+	<hr/>
 	{% endfor %}
+	<br/>
 </html>

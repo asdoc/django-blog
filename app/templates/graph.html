@@ -1,0 +1,43 @@
+<link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="/static/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+<script src="/static/jq.js"></script>
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    
+<style>
+* { font-family: Helvetica, Arial; font-size: 12px;}
+
+dt { float: left; padding: 4px; }
+
+.bar {
+margin-bottom: 10px;
+color: #fff;
+padding: 4px;
+text-align: center;
+background: -webkit-gradient(linear, left top, left bottom, from(#ff7617), to(#ba550f));
+background-color: #ff7617;
+-webkit-box-reflect: below 0 -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,0)), to(rgba(0,0,0,0.25)));
+-webkit-border-radius: 2px;
+-moz-border-radius: 2px;
+border-radius: 2px;
+-webkit-animation-name:bar;
+-webkit-animation-duration:0.5s;
+-webkit-animation-iteration-count:1;
+-webkit-animation-timing-function:ease-out;
+}
+
+#data-one { -webkit-animation-name:bar-one; }
+
+@-webkit-keyframes bar-one {
+0% { width:0%; }
+100% { width:60%; }
+}
+
+
+</style>
+
+<br>
+<pre>
+	<h1>Hits graph</h1><dl style="width: 800px">{% for i in blogs %}<dt>{{i.author}}</dt>
+		<dd><div id="data-one" class="bar" style="width: {{i.percent}}%">{{i.hits}} hits</div></dd>
+	{% endfor %}</dl>
+</pre>

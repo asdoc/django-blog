@@ -64,6 +64,24 @@ def home(request):
 	context = { 'blogs': get() }
 	return render(request,'home.html',context)
 	
+def graph(request):
+	blogs = []
+	max_hits=0
+	client = pymongo.MongoClient('localhost',27017).new
+	fs = gridfs.GridFS( client )
+	x = client.new.find()
+	for i in x:
+		blog_data = {}
+		blog_data['author']=i['author']
+		blog_data['hits']=i['hits']
+		max_hits=max(max_hits,blog_data['hits'])
+		blogs.append(blog_data)
+	
+	for i in xrange(len(blogs)):
+		blogs[i]['percent'] = ((100*float(blogs[i]['hits']))/max_hits)
+	context = {'blogs':blogs}
+	return render(request,'graph.html',context)
+	
 @csrf_exempt
 def add(request):
 	if request.method=="POST":
