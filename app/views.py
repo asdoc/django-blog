@@ -12,10 +12,10 @@ def save(name,content,file_store):
 		fs = gridfs.GridFS( client )
 		fileID = fs.put( file_store )
 		file_entry = { 'name':file_store.name, 'file_id':fileID }
-		new_entry = { 'author':name , 'content':content , 'hits':0 , 'file':file_entry }
+		new_entry = { 'author':name , 'content':content , 'hits':0 , 'file':file_entry, 'comments':[] }
 		client.new.insert(new_entry)
 	else:
-		new_entry = { 'author':name , 'content':content , 'hits':0 }		
+		new_entry = { 'author':name , 'content':content , 'hits':0, 'comments':[] }		
 		client.new.insert(new_entry)
 	
 def get():
@@ -53,6 +53,7 @@ def get_blog(id_blog):
 		blog_data['author']=i['author']
 		blog_data['content']=i['content']
 		blog_data['hits']=str(i['hits'])
+		blog_data['comments']=i['comments']
 
 		if 'file' in i:
 			blog_data['file_name']=i['file']['name']
@@ -98,7 +99,14 @@ def add(request):
 		return HttpResponse("<html><h1>Saved successfully</h1><br/>Go to <a href='/'>home</a></html>")	
 	return render(request,'add.html')
 	
+@csrf_exempt
 def blog(request,id_blog):
+	print "Blog id: "+str(id_blog)
+	if request.method=="POST":
+		client = pymongo.MongoClient('localhost',27017).new
+		fs = gridfs.GridFS( client )
+		x = client.new.find({'_id':ObjectId(id_blog)})
+		client.new.update( {'_id':ObjectId(id_blog)} , { '$addToSet': {'comments':request.POST['comment']}})
 	blogs=[]
 	blog_data = get_blog(id_blog)
 	for i in blog_data:

@@ -18,6 +18,11 @@
 {% endif %}{% endif %}
 			<hr/>
 Hits: {{blog.hits}} <br/>
+			<h2>Comments</h2>
+			{% for com in blog.comments %}
+{{com}}
+			{% endfor %}
+			<form action="./{{blog.id}}" method="POST"><textarea type="text" name="comment"></textarea><input type="Submit" value="Comment"></form>
 		{% endfor %}
 	</pre>
 </html>
