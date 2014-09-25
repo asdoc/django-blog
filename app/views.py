@@ -45,7 +45,6 @@ def get_blog(id_blog):
 	client = pymongo.MongoClient('localhost',27017).new
 	fs = gridfs.GridFS( client )
 	x = client.new.find({'_id':ObjectId(id_blog)})
-	client.new.update( {'_id':ObjectId(id_blog)} , { '$inc': {'hits':1}})
 	
 	for i in x:
 		blog_data = {}
@@ -98,7 +97,7 @@ def add(request):
 		
 		return HttpResponse("<html><h1>Saved successfully</h1><br/>Go to <a href='/'>home</a></html>")	
 	return render(request,'add.html')
-	
+
 @csrf_exempt
 def blog(request,id_blog):
 	print "Blog id: "+str(id_blog)
@@ -107,6 +106,11 @@ def blog(request,id_blog):
 		fs = gridfs.GridFS( client )
 		x = client.new.find({'_id':ObjectId(id_blog)})
 		client.new.update( {'_id':ObjectId(id_blog)} , { '$addToSet': {'comments':request.POST['comment']}})
+	else:
+		client = pymongo.MongoClient('localhost',27017).new
+		fs = gridfs.GridFS( client )
+		x = client.new.find({'_id':ObjectId(id_blog)})
+		client.new.update( {'_id':ObjectId(id_blog)} , { '$inc': {'hits':1}})
 	blogs=[]
 	blog_data = get_blog(id_blog)
 	for i in blog_data:
