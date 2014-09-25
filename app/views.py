@@ -50,6 +50,7 @@ def get_blog(id_blog):
 		blog_data['content']=i['content']
 		blog_data['hits']=str(i['hits'])
 
+		blog_data['file_name']=i['file']['name']
 		blog_data['file_path']= (str(i['file']['file_id'])+"/"+i['file']['name'])
 
 		tmp = os.system("mkdir app/static/"+str(i['file']['file_id']))
@@ -90,5 +91,13 @@ def add(request):
 	return render(request,'add.html')
 	
 def blog(request,id_blog):
-	context = { 'blogs': get_blog(id_blog) }
+	blog_data = get_blog(id_blog)
+	print blog_data[0]['file_name']
+	blog_ext = blog_data[0]['file_name'].split('.')
+	blog_ext = blog_ext[len(blog_ext)-1]
+	if blog_ext=='mp4':
+		blog_data[0]['video']=True
+	else:
+		blog_data[0]['video']=False
+	context = { 'blogs': blog_data }
 	return render(request,'blog.html',context)

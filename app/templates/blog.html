@@ -7,7 +7,15 @@
 			{% for blog in blogs %}
 			<h2 style="align:center">Title: {{blog.author}}</h2>
 {{blog.content}} <br/>
+{% if blog.video %}
+<video width="400" controls>
+  <source src="/static/{{blog.file_path}}" type="video/mp4">
+  <!--source src="mov_bbb.ogg" type="video/ogg"-->
+  Your browser does not support HTML5 video.
+</video>
+{% else %}
 <img src="/static/{{blog.file_path}}" alt="Invalid image">
+{% endif %}
 			<hr/>
 Hits: {{blog.hits}} <br/>
 		{% endfor %}
